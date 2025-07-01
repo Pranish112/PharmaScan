@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/scanFragment">
+
+    <fragment
+        android:id="@+id/scanFragment"
+        android:name="edu.vt.mobiledev.pharmascan.data.ScanFragment"
+        android:label="Scan"
+        tools:layout="@layout/fragment_scan" />
+
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="edu.vt.mobiledev.pharmascan.ui.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+
+    <dialog
+        android:id="@+id/resultDialogFragment"
+        android:name="edu.vt.mobiledev.pharmascan.data.ResultDialogFragment"
+        android:label="Scan Result"
+        tools:layout="@layout/fragment_result_dialog" />
+</navigation>

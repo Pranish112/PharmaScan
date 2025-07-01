@@ -52,4 +52,11 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.google.maps)
+
+    implementation(libs.androidx.navigation.fragment.ktx)  // or latest version
+    // Navigation UI
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    // Material Design Components (for BottomNavigationView)
+    implementation(libs.material.v190)
 }
