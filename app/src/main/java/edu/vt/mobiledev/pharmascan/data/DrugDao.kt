@@ -19,4 +19,7 @@ interface DrugDao {
 
     @Query("SELECT * FROM reports")
     fun getAllReports(): LiveData<List<Report>>
+
+    @Query("SELECT * FROM drugs WHERE imageHash = :hash")
+    suspend fun getDrugByHash(hash: String): Drug?
 }

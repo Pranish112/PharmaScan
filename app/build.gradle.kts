@@ -59,4 +59,11 @@ dependencies {
 
     // Material Design Components (for BottomNavigationView)
     implementation(libs.material.v190)
+
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
+    implementation("com.google.maps.android:android-maps-utils:2.3.0")
+
+
+
 }

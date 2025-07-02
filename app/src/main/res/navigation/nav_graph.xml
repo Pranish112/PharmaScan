@@ -17,9 +17,16 @@
         android:label="Map"
         tools:layout="@layout/fragment_map" />
 
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="edu.vt.mobiledev.pharmascan.data.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
+
     <dialog
         android:id="@+id/resultDialogFragment"
         android:name="edu.vt.mobiledev.pharmascan.data.ResultDialogFragment"
         android:label="Scan Result"
         tools:layout="@layout/fragment_result_dialog" />
+
 </navigation>

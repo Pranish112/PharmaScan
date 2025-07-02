@@ -10,5 +10,9 @@
 
     <string name="scan_date">Scan Date</string>
     <string name="drug_name">Drug name</string>
+    <string name="nav_map">HeatMap</string>
+
+    <string name="history_text">Your Scanned History is here</string>
+
 
 </resources>

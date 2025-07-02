@@ -1,0 +1,52 @@
+package edu.vt.mobiledev.pharmascan.data
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import edu.vt.mobiledev.pharmascan.R
+import java.text.SimpleDateFormat
+import java.util.*
+
+class ReportAdapter(private var reports: List<Report>) :
+    RecyclerView.Adapter<ReportAdapter.ReportViewHolder>() {
+
+    class ReportViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val drugNameText: TextView = itemView.findViewById(R.id.text_drug_name)
+        val counterfeitText: TextView = itemView.findViewById(R.id.text_counterfeit)
+        val timestampText: TextView = itemView.findViewById(R.id.text_timestamp)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_report, parent, false)
+        return ReportViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ReportViewHolder, position: Int) {
+        val report = reports[position]
+
+        holder.drugNameText.text = report.drugName
+        holder.counterfeitText.text = if (report.isCounterfeit) "Counterfeit" else "Authentic"
+        holder.counterfeitText.setTextColor(
+            if (report.isCounterfeit)
+                holder.counterfeitText.context.getColor(android.R.color.holo_red_dark)
+            else
+                holder.counterfeitText.context.getColor(android.R.color.holo_green_dark)
+        )
+
+        val sdf = SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault())
+        holder.timestampText.text = sdf.format(Date(report.timestamp))
+    }
+
+    override fun getItemCount(): Int = reports.size
+
+    fun updateReports(newReports: List<Report>) {
+        reports = newReports
+        notifyDataSetChanged()
+    }
+
+    fun getReportAtPosition(position: Int): Report {
+        return reports[position]
+    }
+}
