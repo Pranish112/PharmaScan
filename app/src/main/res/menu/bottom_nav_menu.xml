@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- History tab -->
+    <item
+        android:id="@+id/historyFragment"
+        android:icon="@drawable/ic_history"
+        android:title="@string/history" />
+
+    <!-- Camera tab -->
+    <item
+        android:id="@+id/scanFragment"
+        android:icon="@drawable/ic_camera"
+        android:title="@string/nav_camera" />
+
+    <!-- Map tab -->
+    <item
+        android:id="@+id/mapFragment"
+        android:icon="@drawable/ic_map"
+        android:title="@string/nav_map" />
+
+</menu>
