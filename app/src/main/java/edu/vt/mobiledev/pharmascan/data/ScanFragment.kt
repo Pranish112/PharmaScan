@@ -29,12 +29,17 @@ import java.io.IOException
 
 class ScanFragment : Fragment() {
 
+    // location provider
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    // viewmodel for accessing DB and logic
     private val viewModel: DrugViewModel by activityViewModels { DrugViewModelFactory(requireActivity().application) }
 
+    // File and URI for captured image
     private var photoUri: Uri? = null
     private var photoFile: File? = null
 
+    // Camera launcher to capture the image
     private val cameraLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -44,6 +49,7 @@ class ScanFragment : Fragment() {
                 bitmap?.let {
                     val hash = ImageUtils.generateHash(it)
 
+                    // Verifies the drug in database by image hash
                     viewModel.verifyDrug(hash) { drug ->
                         lifecycleScope.launch {
                             val location = getLastKnownLocation()
@@ -52,6 +58,7 @@ class ScanFragment : Fragment() {
                                 return@launch
                             }
 
+                            // Save report to DB
                             val report = Report(
                                 drugName = drug?.name ?: "Unknown",
                                 isCounterfeit = drug == null,
@@ -61,6 +68,7 @@ class ScanFragment : Fragment() {
                             )
                             viewModel.insertReport(report)
 
+                            // Shows the result dialog
                             if (drug != null) {
                                 ResultDialogFragment.newInstance(true, drug.name)
                                     .show(parentFragmentManager, "result")
@@ -85,6 +93,7 @@ class ScanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        // Launches the camera on button click
         view.findViewById<Button>(R.id.scan_button).setOnClickListener {
             val permissionsNeeded = mutableListOf<String>()
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
@@ -106,6 +115,7 @@ class ScanFragment : Fragment() {
         }
     }
 
+    // Launch camera intent
     private fun launchCamera() {
         try {
             val photoFile = createImageFile()
@@ -126,6 +136,7 @@ class ScanFragment : Fragment() {
         }
     }
 
+    // Gets the current location using FusedLocationProvider
     private suspend fun getLastKnownLocation(): Location? {
         return if (ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
@@ -138,6 +149,7 @@ class ScanFragment : Fragment() {
         } else null
     }
 
+    // Create temp image file for captured photo
     @Throws(IOException::class)
     private fun createImageFile(): File {
         val fileName = "IMG_${System.currentTimeMillis()}"
@@ -145,6 +157,7 @@ class ScanFragment : Fragment() {
         return File.createTempFile(fileName, ".jpg", storageDir)
     }
 
+    // Handle permission result - to allow the location when using the app
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
