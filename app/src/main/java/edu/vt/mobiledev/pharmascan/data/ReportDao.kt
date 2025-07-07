@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
+// Data Access Object (DAO) for accessing the reports tables
 @Dao
 interface ReportDao {
 

@@ -5,7 +5,12 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
+/**
+ * DialogFragment that displays the result of a drug scan,
+ * indicating whether the drug is authentic or counterfeit.
+ */
 class ResultDialogFragment : DialogFragment() {
+    // Creates and returns the dialog with scan result details
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val isAuthentic = requireArguments().getBoolean("authentic")
         val name = requireArguments().getString("name")
@@ -17,6 +22,10 @@ class ResultDialogFragment : DialogFragment() {
     }
 
     companion object {
+
+         // Factory method to create a new instance of this dialog
+         // with scan result arguments.
+
         fun newInstance(isAuthentic: Boolean, name: String?): ResultDialogFragment {
             val args = Bundle().apply {
                 putBoolean("authentic", isAuthentic)
