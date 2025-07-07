@@ -34,12 +34,19 @@ Third: It will show you on the map, where the counterfeit drug has been found.
 🧰 Technology Stack:
 
 Kotlin - Primary Programming Language for android development
+
 Android Jetpack components (ViewModel, LiveData, Navigation)
+
 Room — local database for storing drug and scan reports
+
 Google Maps API — for map and heatmap visualization
+
 Coroutines — for asynchronous operations
+
 CameraX API — for capturing images
+
 Git — version control
+
 Android Studio — IDE
 
 📽️ Demo Video:
