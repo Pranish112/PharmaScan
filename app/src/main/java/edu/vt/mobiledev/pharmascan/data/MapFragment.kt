@@ -53,6 +53,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             map.clear()
 
             // Add markers for each report
+            // red for counterfeit
+            // green for authentic
             for (report in reports) {
                 val location = LatLng(report.latitude, report.longitude)
                 val markerTitle = if (report.isCounterfeit) "Counterfeit" else "Authentic"
@@ -80,7 +82,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 map.addTileOverlay(TileOverlayOptions().tileProvider(heatmapProvider))
             }
 
-            // Move camera to the most recent report if available
+            // Move camera to the most recent report if possible
             if (reports.isNotEmpty()) {
                 val latest = reports.last()
                 val latestLocation = LatLng(latest.latitude, latest.longitude)

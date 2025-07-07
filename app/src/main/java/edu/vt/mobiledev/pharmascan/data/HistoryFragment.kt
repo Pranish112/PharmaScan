@@ -30,26 +30,25 @@ class HistoryFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Observe LiveData as before
+        // Observes the LiveData
         viewModel.allReports.observe(viewLifecycleOwner) { reports ->
             adapter.updateReports(reports)
         }
 
-        // Setup swipe-to-delete
+        // the Setup for the swipe-to-delete function
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                // We don't want move support in this case
                 return false
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val reportToDelete = adapter.getReportAtPosition(position)
-                // Delete from database via ViewModel
+                // Delete from database through the ViewModel
                 viewModel.deleteReport(reportToDelete)
             }
         }
