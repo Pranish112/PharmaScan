@@ -46,6 +46,25 @@ Android Studio — IDE
 
 https://github.com/user-attachments/assets/f4ed9481-1ef1-4c49-b5d2-43a06af09192
 
+🧪 Feature Documentation:
+
+Currently working features:
+
+- Camera-based drug scanning
+- Verifies drug authenticity using image hash
+- Stores scan history with timestamp and location
+- Heatmap visualization of counterfeit drug locations
+- Swipe-to-delete functionality in history
+- Offline support for history viewing
+
+Limitations:
+
+- Google Maps may not display correctly without API key
+- Location may default to emulator's hardcoded value
+- No user authentication implemented
+- Image hashing is basic (not cryptographic)
+- No blockchain implementation yet
+
 🚧 Future Development Roadmap:
 
 Moving forward, there are a lot of implementations that need to take place, here is the next 6 month roadplan to ensure this app is completed to the maximum degree.
@@ -62,6 +81,33 @@ Goal 3 ->  Beta Testing
 
 Run a Beta version, and see how much data can be obtained on counterfeit drugs, and then move forward based on the utilization of the application, and data obtained through the scans.
 
+API DOCUMENTATION:
+
+PharmaScan uses the **Google Maps SDK for Android** to visualize scanned drug locations on an interactive map. It distinguishes authentic vs. counterfeit reports using colored markers:
+
+- 🟢 Green markers = Authentic drugs
+- 🔴 Red markers = Counterfeit drugs
+
+To enable Google Maps in your local build:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Enable the **Maps SDK for Android** API
+3. Create an **API Key**
+4. Add the key in your local.properties file (recommended):
+5. Reference it in `AndroidManifest.xml`:
+    ```xml
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="${MAPS_API_KEY}" />
+    ```
+
+NOTE: If the API key is missing or restricted, the map will appear blank.
+
+ -> Dependencies
+
+Make sure your `build.gradle` (app-level) includes:
+
+implementation 'com.google.android.gms:play-services-maps:18.2.0'
 
 
 Contact Information:
