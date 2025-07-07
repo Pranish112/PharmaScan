@@ -7,6 +7,10 @@ class DrugRepository(private val db: AppDatabase) {
         return db.drugDao().getDrugByHash(hash)
     }
 
+    suspend fun insertDrug(drug: Drug) {
+        db.drugDao().insertDrug(drug)
+    }
+
     // Report-related methods
     suspend fun insertReport(report: Report) {
         db.reportDao().insertReport(report)
@@ -24,7 +28,4 @@ class DrugRepository(private val db: AppDatabase) {
         db.reportDao().deleteReport(report)
     }
 
-    suspend fun insertDrug(drug: Drug) {
-        db.drugDao().insertDrug(drug)
-    }
 }

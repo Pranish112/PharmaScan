@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
+// Data Access Object (DAO) for accessing the drugs and reports tables
 @Dao
 interface DrugDao {
     @Query("SELECT * FROM drugs WHERE imageHash = :hash")

@@ -12,7 +12,7 @@ class DrugViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = DrugRepository(AppDatabase.getDatabase(application))
 
-    // Optional LiveData if you want real-time observations
+    // LiveData for real-time observations
     val allReports: LiveData<List<Report>> = AppDatabase.getDatabase(application).reportDao().getAllReportsLive()
 
     // Used in ScanFragment to verify a scanned drug hash
@@ -29,7 +29,7 @@ class DrugViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // Store report in database
+    // Store the report in database
     fun insertReport(report: Report) {
         viewModelScope.launch {
             repository.insertReport(report)
